@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        {% for guild in request.session.guild_data %}
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="guild-img" src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png" alt="{{ guild.name }}">
+                        <a href="{{ guild.id }}/"><h5 class="card-title">{{ guild.name }}</h5></a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock content %}

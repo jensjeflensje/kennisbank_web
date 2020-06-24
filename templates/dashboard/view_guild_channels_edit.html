@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Kanaal bewerken
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ guild_data.name }}</h1>
+    <h5>Kanaal bewerken</h5>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Bewerken" class="btn btn-primary">
+    </form>
+    <br>
+    <br>
+    <a class="btn btn-danger" href="delete/">Verwijder</a>
+    <br>
+    <br>
+{% endblock content %}
