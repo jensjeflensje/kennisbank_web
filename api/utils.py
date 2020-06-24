@@ -19,8 +19,8 @@ def find_question(message, questions):
     for question in questions:
         for part in message_parts:
             question_parts = question.keywords.lower().replace("\r", "").split("\n")
-            for question_part == question_parts:
-                if part in question_part:
+            for question_part in question_parts:
+                if part == question_part:
                     question_points = add_question_points(question_points, question.id)
 
     if len(question_points) == 0:
