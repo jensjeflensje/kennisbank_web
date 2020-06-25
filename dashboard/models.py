@@ -7,7 +7,7 @@ class Guild(models.Model):
     discord_id = models.IntegerField()
 
     def __str__(self):
-        return self.discord_id
+        return str(self.discord_id)
 
 
 class GuildChannel(models.Model):
