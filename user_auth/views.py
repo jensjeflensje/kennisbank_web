@@ -39,7 +39,7 @@ def callback(request):
                 profile_obj.name = profile["username"]
             guild_data = oauth.get_route(token, "/users/@me/guilds")
             if guild_data:
-                guild_data = [guild for guild in guild_data if guild["owner"]]
+                guild_data = [guild for guild in guild_data if (guild["permissions"] & 0x00000008) == 0x00000008]
                 for guild in guild_data:
                     if not Guild.objects.filter(discord_id=guild["id"]).first():
                         Guild(discord_id=guild["id"]).save()
