@@ -55,7 +55,7 @@ def add_question(request, guild_id, guild_data, guild_obj):
 @get_guild_data
 @get_guild_obj
 def edit_question(request, guild_id, guild_data, guild_obj, question_id=0):
-    question = get_object_or_404(Question, pk=question_id, guild=guild_obj)
+    question = Question.objects.filter(id=question_id, guild=guild_obj).first()
     if request.method == "POST":
         form = QuestionForm(request.POST, instance=question)
         if form.is_valid():
@@ -77,7 +77,7 @@ def edit_question(request, guild_id, guild_data, guild_obj, question_id=0):
 @get_guild_data
 @get_guild_obj
 def delete_question(request, guild_id, guild_data, guild_obj, question_id=0):
-    question = get_object_or_404(Question, pk=question_id, guild=guild_obj)
+    question = Question.objects.filter(id=question_id, guild=guild_obj).first()
     question.delete()
     messages.success(request, "Vraag succesvol verwijderd!")
     return redirect(f"/dashboard/{guild_id}/")
@@ -110,7 +110,7 @@ def add_channel(request, guild_id, guild_data, guild_obj):
 @get_guild_data
 @get_guild_obj
 def edit_channel(request, guild_id, guild_data, guild_obj, channel_id=0):
-    channel = get_object_or_404(GuildChannel, pk=channel_id, guild=guild_obj)
+    channel = GuildChannel.objects.filter(id=channel_id, guild=guild_obj).first()
     if request.method == "POST":
         form = ChannelForm(request.POST, instance=channel)
         if form.is_valid():
@@ -132,7 +132,7 @@ def edit_channel(request, guild_id, guild_data, guild_obj, channel_id=0):
 @get_guild_data
 @get_guild_obj
 def delete_channel(request, guild_id, guild_data, guild_obj, channel_id=0):
-    channel = get_object_or_404(GuildChannel, pk=channel_id, guild=guild_obj)
+    channel = GuildChannel.objects.filter(id=channel_id, guild=guild_obj).first()
     channel.delete()
     messages.success(request, "Kanaal succesvol verwijderd!")
     return redirect(f"/dashboard/{guild_id}/")
