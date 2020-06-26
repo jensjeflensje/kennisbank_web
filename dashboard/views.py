@@ -55,7 +55,7 @@ def add_question(request, guild_id, guild_data, guild_obj):
 @get_guild_data
 @get_guild_obj
 def edit_question(request, guild_id, guild_data, guild_obj, question_id=0):
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=question_id, guild=guild_obj)
     if request.method == "POST":
         form = QuestionForm(request.POST, instance=question)
         if form.is_valid():
@@ -132,7 +132,7 @@ def edit_channel(request, guild_id, guild_data, guild_obj, channel_id=0):
 @get_guild_data
 @get_guild_obj
 def delete_channel(request, guild_id, guild_data, guild_obj, channel_id=0):
-    channel = get_object_or_404(GuildChannel, pk=channel_id)
+    channel = get_object_or_404(GuildChannel, pk=channel_id, guild=guild_obj)
     channel.delete()
     messages.success(request, "Kanaal succesvol verwijderd!")
     return redirect(f"/dashboard/{guild_id}/")
